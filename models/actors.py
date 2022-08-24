@@ -10,3 +10,8 @@ class Actor(db.Model):
     gender = db.Column(db.String())
     country = db.Column(db.String())
 
+    roles = db.relationship(
+        "Role",
+        cascade="all, delete"
+    )
+

@@ -9,4 +9,10 @@ class Movie(db.Model):
     genre = db.Column(db.String())
     length = db.Column(db.Integer())
     year = db.Column(db.Integer())
+    director_id = db.Column(db.Integer, db.ForeignKey("directors.id"), nullable=False)
+
+    reviews = db.relationship(
+        "Review",
+        cascade="all, delete"
+    )
 

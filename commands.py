@@ -4,6 +4,8 @@ from main import bcrypt
 from models.actors import Actor
 from models.movies import Movie
 from models.users import User
+from models.directors import Director
+from models.roles import Role
 from datetime import date
 
 db_commands = Blueprint("db", __name__)
@@ -23,11 +25,28 @@ def seed_db():
     )
     db.session.add(user)
 
+    director1 = Director(
+        first_name = "Denis",
+        last_name = "Villeneuve",
+        country = "Canada"
+    )
+    db.session.add(director1)
+
+    director2 = Director(
+        first_name = "Jon",
+        last_name = "Watts",
+        country = "USA"
+    )
+    db.session.add(director2)
+
+    db.session.commit()
+
     movie1 = Movie(
         title = "Spider-Man: No Way Home",
         genre = "Action",
         length = 148,
-        year = 2021
+        year = 2021,
+        director_id = 2       
     )
     db.session.add(movie1)
 
@@ -35,7 +54,8 @@ def seed_db():
         title = "Dune",
         genre = "Sci-fi",
         length = 155,
-        year = 2021
+        year = 2021,
+        director_id = 1
     )
     db.session.add(movie2)
 
@@ -55,6 +75,7 @@ def seed_db():
     )
     db.session.add(actor2)
 
+
     actor3 = Actor(
         first_name = "Timothee",
         last_name = "Chalemet",
@@ -70,6 +91,18 @@ def seed_db():
         country = "USA"
     )
     db.session.add(actor4)
+
+    role1 = Role(
+        actor_id = 1,
+        movie_id = 1
+    )
+    db.session.add(role1)
+
+    role2 = Role(
+        actor_id = 3,
+        movie_id = 2
+    )
+    db.session.add(role2)
 
     # commit the changes
     db.session.commit()

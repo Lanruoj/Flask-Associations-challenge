@@ -7,4 +7,7 @@ class User(db.Model):
     username = db.Column(db.String(), nullable=False, unique=True)
     password = db.Column(db.String(), nullable=False)
 
-    
+    reviews = db.relationship(
+        "Review",
+        cascade="all, delete"
+    )
